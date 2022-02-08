@@ -22,3 +22,47 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+users = [
+    {
+        "name": "John",
+        "password": "sha256",
+        "activated": True
+    },
+    {
+        "name": "Sergey",
+        "password": "qwerty",
+        "activated": False
+    },
+    {
+        "name": "Marie",
+        "password": "123",
+        "activated": True
+    },
+]
+
+
+def check_user_var1(user):
+    """ Итоговая сложность: O(n) """
+    for item in users:                                              # O(n)
+        if item["name"] == user and item["activated"] is True:      # O(1)
+            return "You can login."                                 # O(1)
+    return "You shall activate you account."                        # O(1)
+
+
+def check_user_var2(user):
+    """ Итоговая сложность: O(n) """
+    for item in users:                                              # O(n)
+        if item["name"] == user:                                    # O(1)
+            if item["activated"] is True:                           # O(1)
+                return "You can login."                             # O(1)
+    return "You shall activate you account."                        # O(1)
+
+
+print(check_user_var1("John"))
+print(check_user_var1("Sergey"))
+print(check_user_var1("Marie"))
+
+print(check_user_var2("John"))
+print(check_user_var2("Sergey"))
+print(check_user_var2("Marie"))

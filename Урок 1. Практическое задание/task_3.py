@@ -17,3 +17,34 @@
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
 
+companies = {
+    "ShellCo1": 100000,
+    "ShellCo2": 300000,
+    "ShellCo3": 200000
+}
+
+
+def find_co_var1(company_dict):
+    return max(company_dict, key=company_dict.get)
+    # O(n)
+
+
+def find_co_var2(company_dict):
+    return [key for (key, value) in company_dict.items() if value == max(company_dict.values())]
+    # O(1) + O(n) + O(1) + O(n)
+
+
+def find_co_var3(company_dict):
+    min_val = 0                                 # O(1)
+    winner = None                               # O(1)
+    for (key, value) in company_dict.items():   # O(n)
+        if value > min_val:                     # O(1)
+            min_val = value                     # O(1)
+            winner = key                        # O(1)
+    return winner                               # O(1)
+
+
+print(find_co_var1(companies))
+print(find_co_var2(companies))
+print(find_co_var3(companies))
+
