@@ -15,3 +15,28 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def min_value_var1(li):
+    """Сложность O(n^2)"""
+    for i in range(len(li)):                    # O(n)
+        for j in range(i + 1, len(li)):         # O(n^2)
+            if li[i] > li[j]:                   # O(1)
+                li[i], li[j] = li[j], li[i]     # O(1)
+
+    return li[0]                                # O(1)
+
+
+def min_value_var2(li):
+    """Сложность O(n)"""
+    min_num = li[0]                             # O(1)
+    for num in li:                              # O(n)
+        if num < min_num:                       # O(1)
+            min_num = num                       # O(1)
+    return min_num                              # O(1)
+
+
+my_list = [64, 25, 12, 22, 11, 1, 2, 44, 3, 122, 23, 34]
+
+print(min_value_var1(my_list))
+print(min_value_var2(my_list))
