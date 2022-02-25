@@ -19,7 +19,6 @@ reduce
 """
 
 from collections import defaultdict
-from collections import deque
 
 hex_signs = '0123456789ABCDEF'
 table = defaultdict(int)
@@ -39,7 +38,7 @@ def get_num(string):
 
 
 def get_hex(numb):
-    num = deque()
+    num = []
     while numb > 0:
         d = numb % 16
         [num.append(i) for i in table if table[i] == d]
