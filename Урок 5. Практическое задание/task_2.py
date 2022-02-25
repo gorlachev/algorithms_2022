@@ -16,7 +16,45 @@
 defaultdict(list)
 int(, 16)
 reduce
+"""
 
+from collections import defaultdict
+from collections import deque
+
+hex_signs = '0123456789ABCDEF'
+table = defaultdict(int)
+count = 0
+for i in hex_signs:
+    table[i] += count
+    count += 1
+
+
+def get_num(string):
+    dex = 0
+    num = list(string)
+    num.reverse()
+    for n in range(len(num)):
+        dex += table[num[n]] * 16 ** n
+    return dex
+
+
+def get_hex(numb):
+    num = deque()
+    while numb > 0:
+        d = numb % 16
+        [num.append(i) for i in table if table[i] == d]
+        numb //= 16
+    num.reverse()
+    return list(num)
+
+
+num_1 = get_num(input('Первое число : ').upper())
+num_2 = get_num(input('Второе число: ').upper())
+
+print(f'Сумма: {get_hex(num_1 + num_2)}')
+print(f'Произведение: {get_hex(num_1 * num_2)}')
+
+"""
 2) через ООП
 
 вспомните про перегрузку методов
