@@ -61,4 +61,3 @@ print(f'Произведение: {get_hex(num_1 * num_2)}')
 __mul__
 __add__
 """
-
