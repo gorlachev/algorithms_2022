@@ -30,3 +30,49 @@
 
 Это файл для второго скрипта
 """
+
+
+# Урок 9 - Задание 2. Реализовать класс Road (дорога).
+# определить атрибуты: length (длина), width (ширина);
+# определить метод расчёта массы асфальта, необходимого для покрытия всей дороги;
+# использовать формулу: длина*ширина*масса асфальта для покрытия одного кв. метра дороги асфальтом,
+# толщиной в 1 см*число см толщины полотна;
+# проверить работу метода.
+#
+# Например: 20 м*5000 м*25 кг*5 см = 12500 т.
+
+from memory_profiler import profile
+
+from pympler import asizeof
+
+
+class Road1:
+    def __init__(self, width, length):
+        self.width = width
+        self.length = length
+
+    def calc_mass(self):
+        result = self.length * self.width * 25 * 5 / 1000
+        print(f"{result} т.")
+
+
+old_road = Road1(20, 5000)
+
+# оптимизация памяти через слоты
+
+
+class Road2:
+    __slots__ = ["width", "length"]
+
+    def __init__(self, width, length):
+        self.width = width
+        self.length = length
+
+    def calc_mass(self):
+        result = self.length * self.width * 25 * 5 / 1000
+        print(f"{result} т.")
+
+
+print(asizeof.asizeof(Road1(20, 5000)))  #328
+print(asizeof.asizeof(Road2(20, 5000)))  #112
+

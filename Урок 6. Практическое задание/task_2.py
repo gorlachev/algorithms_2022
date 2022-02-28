@@ -9,3 +9,19 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+@profile
+def wrapper(number):  # профилирование памяти через обертывание рекурсивной функции
+    def count_down(input_number):
+        """ Count down from a number  """
+        print(input_number)
+        next = input_number - 1
+        if next > 0:
+            count_down(next)
+
+    return count_down(number)
+
+
+wrapper(5)
