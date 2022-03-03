@@ -18,3 +18,21 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+import random
+import timeit
+
+numbers = [random.randint(-100, 100) for _ in range(100)]
+
+
+def bubble_reverse(nums):
+    for j in range(len(nums) - 1):
+        for i in range(len(nums) - 1 - j):
+            if nums[i] < nums[i + 1]:
+                nums[i], nums[i + 1] = nums[i + 1], nums[i]
+    return nums
+
+
+print('Исходный массив:', numbers)
+print('Обратная пузырьковая:', bubble_reverse(numbers[:]))
+
+print(timeit.timeit("bubble_reverse(numbers)", setup="from __main__ import bubble_reverse, numbers", number=100))
