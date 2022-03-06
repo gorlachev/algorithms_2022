@@ -68,6 +68,31 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    # def check_if_is_tree(self, obj):
+    #     if obj is None or (obj.left_child is None and obj.right_child is None):
+    #         return True
+    #
+    #     elif obj.right_child is None:
+    #         print(obj.left_child.root)
+    #         return obj.left_child.root < obj.root and self.check_if_is_tree(obj.left_child)
+    #
+    #     elif obj.left_child is None:
+    #         print(obj.right_child.root)
+    #         return obj.right_child.root >= obj.root and self.check_if_is_tree(obj.right_child)
+    #
+    #     return self.check_if_is_tree(obj.left_child) and self.check_if_is_tree(obj.right_child)
+
+    def validate_tree(self, tree):
+        return self.helper(tree, float('-inf'), float('inf'))
+
+    def helper(self, tree, min_val, max_val):
+        if tree is None:
+            return True
+        if tree.root < min_val or tree.root >= max_val:
+            return False
+        left_is_valid = self.helper(tree.left_child, min_val, tree.root)
+        return left_is_valid and self.helper(tree.right_child, tree.root, max_val)
+
 
 r = BinaryTree(8)
 print(r.get_root_val())
@@ -80,3 +105,13 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+print(r.validate_tree(r))  # False
+
+z = BinaryTree(10)
+print(z.validate_tree(z))  # True
+
+z.insert_left(12)
+print(z.validate_tree(z))  # False
+
+z.insert_right(3)
+print(z.validate_tree(z))  # False
